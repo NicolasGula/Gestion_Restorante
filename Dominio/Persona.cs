@@ -38,8 +38,6 @@ namespace Dominio
             set { rol = value; }
         }
 
-
-
         public int Id
         {
             get { return id; }

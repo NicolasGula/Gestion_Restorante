@@ -29,33 +29,27 @@
 
     <div class="mb-3">
         <label for="nombre">Nombre</label><br />
-        <input type="text" name="nombre" id="nombre" value="@Model.Nombre" required />
+        <input type="text" name="nombre" id="nombre" value="@ViewBag.Nombre" required />
     </div>
 
     <div class="mb-3">
         <label for="apellido">Apellido</label><br />
-        <input type="text" name="apellido" id="apellido" value="@Model.Apellido" required />
+        <input type="text" name="apellido" id="apellido" value="@ViewBag.Apellido" required />
     </div>
 
     <div class="mb-3">
         <label for="password">Password(Debe contener al menos: una minuscula, una mayuscula, un simbolo y un numero.)</label><br />
-        <input type="password" name="password" id="password" value="@Model.Password" />
+        <input type="password" name="password" id="password" value="@ViewBag.Password" />
     </div>
 
     <div class="mb-3">
         <label for="nombreUsuario">Nombre usuario</label><br />
-        <input type="text" name="nombreUsuario" id="nombreUsuario" value="@Model.NombreUsuario" required />
-    </div>
-
-    <div class="mb-3">
-        <select name="rol">
-            <option value="cliente">cliente</option>
-        </select>
+        <input type="text" name="nombreUsuario" id="nombreUsuario" value="@ViewBag.NombreUsuario" required />
     </div>
 
     <div class="mb-3">
         <label for="mail">Email</label><br />
-        <input type="email" name="mail" id="email" value="@Model.Mail" required />
+        <input type="email" name="mail" id="email" value="@ViewBag.mail" required />
     </div>
 
 
@@ -68,7 +62,6 @@
 <p class="text-center">
     <a href="~/Persona/Login">VOLVER AL LOGIN</a>
 </p>
-
 <br />
 
 

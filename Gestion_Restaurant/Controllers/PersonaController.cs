@@ -11,6 +11,8 @@ namespace Gestion_Restaurant.Controllers
 {
     public class PersonaController : Controller
     {
+        
+
         Administrativa sistema = Administrativa.Instancia;
 
         public IActionResult Index()
@@ -31,10 +33,16 @@ namespace Gestion_Restaurant.Controllers
         }
 
         [HttpPost]
-        public IActionResult AltaCliente(Cliente unCliente)
+        public IActionResult AltaCliente(string Nombre, string Apellido, string Password, string NombreUsuario, string mail)
         {
+            ViewBag.Nombre = Nombre;
+            ViewBag.Apellido = Apellido;
+            ViewBag.Password = Password;
+            ViewBag.NombreUsuario = NombreUsuario;
+            ViewBag.mail = mail;
 
-            if (sistema.AgregarCliente(unCliente))
+            string rol = "cliente";
+            if (sistema.CargarCliente(Nombre, Apellido, Password, NombreUsuario, rol, mail))
             {
                 ViewBag.Resultado = true;
                 ViewBag.Mensaje = "Tu usuario se genero correctamente.";
@@ -44,9 +52,10 @@ namespace Gestion_Restaurant.Controllers
             {
                 ViewBag.Resultado = false;
                 ViewBag.Mensaje = "No se pudo generar el usuario. Intentalo nuevamente.";
-                return View(unCliente);
+                return View();
             }
         }
+
 
         [HttpPost]
         public IActionResult Login(string nombreUsuario, string password)
