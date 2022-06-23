@@ -1,0 +1,97 @@
+﻿@using Dominio
+@model List<Local>;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ }
+
+@if (ViewBag.ServiciosLocalesAbiertos.Count > 0)
+{
+    <h1>SERVICIOS LOCALES ABIERTOS</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Cerrar Caja</th>
+                <th>Modificar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Local item in ViewBag.ServiciosLocalesAbiertos)
+            {
+                @*@if (item.Cliente.NombreUsuario == ViewBag.NombreUsuario && item.Estado == true)
+                {*@
+            <tr>
+                <td>@item.Fecha.ToShortDateString()</td>
+                <td>@item.Cliente.NombreUsuario</td>
+                <td>
+                    <form action="~/Cliente/CerrarServicio" method="post">
+                        <button type="submit" name="idServicio" class="btn btn-danger" value="@item.Id">CERRAR</button>
+                    </form>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-success text-light">
+                        <a href="~/Cliente/modificarServicio">Modificar</a>
+                    </button>
+                </td>
+            </tr>
+             }
+        </tbody>
+    </table>
+}
+
+<h1>SOLICITAR SERVICIO LOCAL</h1>
+
+<form action="~/Cliente/SolicitarServicio" method="post">
+
+    <div class="mb-3">
+        <select name="idPlato">
+            @foreach (Plato item in ViewBag.platos)
+            {
+                <option value="@item.Id">@item.Nombre</option>
+             }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Seleccione Mozo</label>
+            <select name="idMozo">
+                @foreach (Mozo item in @ViewBag.mozos)
+                {
+                    <option value="@item.Id">@item.Nombre</option>
+                    }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Ingrese Cantidad </label>
+        <input type="number" min="1" name="Cantidad" required/>
+    </div>
+
+    <div class="mb-3">
+        <label>Ingrese fecha</label>
+        <input type="DATE" name="fecha" required />
+    </div>
+
+    <div class="mb-3">
+        <label>Numero De mesa</label>
+        <input type="number" min="1" name="mesa" required/>
+    </div>
+
+    <div class="mb-3">
+        <label>Precio Cubiertos</label>
+        <input type="number" min="1" name="cubierto" value="" required/>
+    </div>
+
+    <div class="mb-3">
+        <label>Cantidad comensales</label>
+        <input type="number" min="1" name="comensales" value="" required/>
+    </div>
+
+    <button type="submit" class="btn btn-success">Solicitar</button>
+</form>
+
+
+
+

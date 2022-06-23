@@ -1,0 +1,35 @@
+﻿@using Dominio
+@model List<Plato>
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1 class="text-center">PLATOS</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">NOMBRE</th>
+            <th scope="col">PRECIO</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (Plato item in Model)
+        {
+            <tr>
+                <td>@item.Nombre</td>
+                <td>$ @item.Precio</td>
+            </tr>
+         }
+            
+        </tbody>
+</table>
+
+
+
+

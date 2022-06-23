@@ -1,0 +1,84 @@
+﻿@using Dominio
+@model List<Servicio>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<header class="text-center">
+    <h1>Bienvenid@@ @ViewBag.Nombre</h1>
+    <h3>Lista de los servicios pedidos.</h3>
+    <p>(Puedes filtrar tus servicios ingresando dos fechas)</p>
+</header>
+
+<form action="~/Cliente/FiltroPorFecha" method="get">
+        <label>Fecha Inicial</label>
+        <input type="date" name="inicio" required/>
+        <label>Fecha Final</label>
+        <input type="date" name="fin" required/>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">FECHA</th>
+            <th scope="col">CANTIDAD</th>
+            <th scope="col">PLATO</th>
+            <th scope="col">PRECIO</th>
+            <th scope="col">PRECIO TOTAL</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.Servicios.Count > 0)
+        {
+            @foreach (Servicio item in Model)
+            {
+    @if (item.Cliente.NombreUsuario == ViewBag.NombreUsuario)
+    {
+    @if (item.MostrarCantidad().Count > 1)
+    {
+    <tr>
+        <td>@item.Fecha.ToShortDateString()</td>
+        <td>
+            @foreach (CantidadPlatos pla in item.MostrarCantidad())
+            {
+                @pla.Cantidad <br />}
+        </td>
+        <td>
+            @foreach (CantidadPlatos pla in item.MostrarCantidad())
+            {
+                @pla.Plato.Nombre <br />
+            }
+        </td>
+        <td>
+            @foreach (CantidadPlatos pla in item.MostrarCantidad())
+            {
+    @pla.Plato.Precio <br />}
+        </td>
+        <td>@Math.Round(item.CalcularPrecio(), 2)</td>
+    </tr> }
+                            else
+                            {
+                                @foreach (CantidadPlatos pla in item.MostrarCantidad())
+                                {
+                                    <tr>
+                                        <td>@item.Fecha.ToShortDateString()</td>
+                                        <td>@pla.Cantidad</td>
+                                        <td>@pla.Plato.Nombre</td>
+                                        <td>@pla.Plato.Precio</td>
+                                        <td>@Math.Round(item.CalcularPrecio(), 2)</td>
+                                    </tr>}}
+}}
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center text-danger">"No se encuentran servicios entre esas fechas"</td>
+                </tr>
+            }
+    </tbody>
+        </table>

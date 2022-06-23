@@ -1,0 +1,34 @@
+﻿@using Dominio
+@model List<Plato>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1 class="text-center">NUESTROS PLATOS</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>NOMBRE</th>
+            <th>PRECIO</th>
+            <th>LIKE</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Plato item in Model)
+        {
+        <tr>
+            <td>@item.Nombre</td>
+            <td>@item.Precio</td>
+            <td>
+                <form action="~/Cliente/AgregarLike" method="post">
+                    <button type="submit" name="nombre" value="@item.Nombre" class="btn btn-success">@item.MeGustas ME GUSTA</button>
+                </form>
+            </td>
+            
+        </tr>
+        }
+    </tbody>
+</table>

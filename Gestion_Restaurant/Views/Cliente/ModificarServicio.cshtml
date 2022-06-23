@@ -1,0 +1,67 @@
+﻿@using Dominio
+@model List<Servicio>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1 class="text-center">MODIFICAR SERVICIO</h1>
+
+<form action="~/Cliente/modificarServicio" method="post">
+
+    <div class="mb-3">
+        <label>Agregar plato</label>
+        <select name="idPlato">
+
+            @foreach (Plato item in ViewBag.platos)
+            {
+                <option value="@item.Id">@item.Nombre</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Ingrese Cantidad </label>
+        <input type="number" min="1" name="Cantidad" required />
+    </div>
+
+    <div class="mb-3">
+        <label>ID SERVICIO</label>
+        <select name="idServicio">
+            @foreach (Servicio item in Model)
+            {
+                @if (item.Cliente.NombreUsuario == ViewBag.NombreUsuario && item.Estado == true)
+                {
+                    <option value="@item.Id">@item.Id</option>
+                }
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Solicitar</button>
+</form>
+
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Servicio item in Model)
+        {
+
+            @if (item.Cliente.NombreUsuario == ViewBag.NombreUsuario && item.Estado == true)
+            {
+                <tr>
+                    <td>@item.Fecha.ToShortDateString()</td>
+                    <td>@item.Id</td>
+                </tr>
+            }}
+
+    </tbody>
+</table>

@@ -1,0 +1,95 @@
+﻿@using Dominio
+@model List<Delivery>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@if (ViewBag.ServiciosDeliverysAbiertos.Count > 0)
+{
+    <h1>SERVICIOS DELIVERY ABIERTOS</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Cerrar Caja</th>
+                <th>Modificar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Delivery item in ViewBag.ServiciosDeliverysAbiertos)
+            {
+                @*@if (item.Cliente.NombreUsuario == ViewBag.NombreUsuario && item.Estado == true)
+                {*@
+            <tr>
+                <td>@item.Fecha.ToShortDateString()</td>
+                <td>@item.Cliente.NombreUsuario</td>
+                <td>
+                    <form action="~/Cliente/CerrarServicioDelivery" method="post">
+                        <button type="submit" name="idServicio" class="btn btn-danger" value="@item.Id">CERRAR</button>
+                    </form>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-success text-light">
+                        <a href="~/Cliente/modificarServicio">Modificar</a>
+                    </button>
+                </td>
+            </tr>
+                }
+            @*}*@
+        </tbody>
+    </table>
+}
+
+
+<h1>SOLICITAR SERVICIO DELIVERY</h1>
+
+<form action="~/Cliente/SolicitarDelivery" method="post">
+
+    <div class="mb-3">
+        <select name="idPlato">
+            @foreach (Plato item in ViewBag.platos)
+            {
+                <option value="@item.Id">@item.Nombre</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Seleccione Repartidor</label>
+        <select name="idRepartidor">
+            @foreach (Repartidor item in @ViewBag.repartidores)
+            {
+                <option value="@item.Id">@item.Nombre</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Ingrese Direccion </label>
+        <input type="text" name="direccion" required/>
+    </div>
+
+    <div class="mb-3">
+        <label>Ingrese fecha</label>
+        <input type="DATE" name="fecha" required/>
+    </div>
+
+    <div class="mb-3">
+        <label>Ingrese distancia</label>
+        <input type="number" min="1" name="distancia" required/>
+    </div>
+
+    <div class="mb-3">
+        <label>Cantidad plato</label>
+        <input type="number" min="1" name="cantidad" value="" required/>
+    </div>
+
+    <button type="submit" class="btn btn-success">Solicitar</button>
+</form>
+
+
+

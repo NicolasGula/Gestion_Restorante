@@ -1,0 +1,74 @@
+﻿@using Dominio
+@model Cliente
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+
+<h1 class="text-center">REGISTRARSE</h1>
+
+
+@if (ViewBag.Resultado == true)
+{
+    <div class="alert alert-success" role="alert">
+        <p>@ViewBag.Mensaje</p>
+    </div>
+}
+
+@if(ViewBag.Resultado == false)
+{
+    <div class="alert alert-danger" role="alert">
+        <p>@ViewBag.Mensaje</p>
+    </div>
+}
+
+<form class="text-center" action="" method="post">
+
+    <div class="mb-3">
+        <label for="nombre">Nombre</label><br />
+        <input type="text" name="nombre" id="nombre" value="@Model.Nombre" required />
+    </div>
+
+    <div class="mb-3">
+        <label for="apellido">Apellido</label><br />
+        <input type="text" name="apellido" id="apellido" value="@Model.Apellido" required />
+    </div>
+
+    <div class="mb-3">
+        <label for="password">Password(Debe contener al menos: una minuscula, una mayuscula, un simbolo y un numero.)</label><br />
+        <input type="password" name="password" id="password" value="@Model.Password" />
+    </div>
+
+    <div class="mb-3">
+        <label for="nombreUsuario">Nombre usuario</label><br />
+        <input type="text" name="nombreUsuario" id="nombreUsuario" value="@Model.NombreUsuario" required />
+    </div>
+
+    <div class="mb-3">
+        <select name="rol">
+            <option value="cliente">cliente</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="mail">Email</label><br />
+        <input type="email" name="mail" id="email" value="@Model.Mail" required />
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Registrarse</button>
+
+</form>
+
+<br />
+
+<p class="text-center">
+    <a href="~/Persona/Login">VOLVER AL LOGIN</a>
+</p>
+
+<br />
+
+

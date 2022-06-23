@@ -1,0 +1,51 @@
+﻿@using Dominio
+@model List<Servicio>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>SERVICIOS POR PLATOS</h1>
+
+<form action="~/Cliente/MostrarPlatosUnaVez" method="post">
+    <select name="idPlato">
+
+        @foreach (Plato item in ViewBag.Platos)
+        {
+            <option value="@item.Id">@item.Nombre</option>
+
+        }
+    </select>
+    <input type="submit" value="Buscar">
+</form>
+
+<table class=" table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">FECHA</th>
+            <th scope="col">CLIENTE</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.PlatoUnaVez.Count > 0)
+        {
+            @foreach (Servicio item in ViewBag.PlatoUnaVez)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Fecha.ToShortDateString()</td>
+                    <td>@item.Cliente.Nombre</td>
+                </tr>
+            }
+        }
+            else
+            {
+                <tr>
+                    <td colspan="3" class="text-center">NO HA PEDIDO DE ESTE PLATO</td>
+                </tr>
+            }
+
+    </tbody>
+</table>

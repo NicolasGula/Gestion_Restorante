@@ -1,0 +1,54 @@
+﻿@using Dominio
+@model List<Local>;
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ 
+}
+
+<header class="text-center">
+    <h1>Bienvenid@@ @ViewBag.Nombre</h1>
+    <h3>Lista de los servicios que entregastes.</h3>
+    <p>(Puedes filtrar tus servicios ingresando 2 fechas)</p>
+</header>
+@*@097108308@*@
+<form action="~/Mozo/FiltroPorNombre" method="get">
+    <label>Fecha Inicial</label>
+    <input type="date" name="inicial" required/>
+    <label>Fecha Final</label>
+    <input type="date" name="final" required/>
+    <button type="submit">Buscar</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nombre Cliente</th>
+            <th scope="col">Numero de mesa</th>
+            <th scope="col">Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.ListaDeServicios.Count == 0)
+        {
+            <tr>
+                <td colspan="4" class="text-center">NO HAY COINCIDENCIAS CON TU BUSQUEDA</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (Local item in ViewBag.ListaDeServicios)
+            {
+                @if (item.Mozo.NombreUsuario == ViewBag.NombreUsuario)
+                {
+                    <tr>
+                        <td>@item.Cliente.Nombre</td>
+                        <td>@item.NumeroMesa</td>
+                        <td>@item.Fecha.ToShortDateString()</td>
+                    </tr>   
+                 }       
+            }
+        }
+    </tbody>
+</table>

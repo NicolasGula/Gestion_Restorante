@@ -1,0 +1,43 @@
+﻿@using Dominio
+@model List<Servicio>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>TU SERVICIO(S) MAS CARO(S)</h1>
+
+<table class="table">
+<thead>
+    <tr>
+        <th scope="col">NOMBRE DEL PLATO</th>
+        <th scope="col">PRECIO</th>
+    </tr>
+</thead>
+<tbody>
+    @if (ViewBag.ServicioMasCaro.Count > 0)
+    {
+        @foreach (Servicio item in Model)
+        {
+            @*@if (item.Cliente.NombreUsuario == ViewBag.NombreUsuario)
+            {*@
+                <tr>
+                    @foreach (CantidadPlatos pla in @item.MostrarCantidad())
+                    {
+                        <td>@pla.Plato.Nombre</td>
+                        <td>@item.CalcularPrecio()</td>
+                    }
+                </tr>
+            }
+        //}
+            }
+            else
+            {
+                <tr>
+                    <td colspan="2" class="text-center">NO TIENE SERVICIOS</td>
+                </tr>
+            }
+</tbody>
+</table>
